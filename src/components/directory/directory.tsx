@@ -2,20 +2,20 @@ import React from "react";
 import CategoryItem from "../category-item/category-item";
 import { Category } from "../../types";
 
-import "./categories.styles.scss";
+import "./directory.scss";
 
-interface CategoriesProps {
+interface DirectoryProps {
   categories: Category[];
 }
 
-const Categories = ({ categories }: CategoriesProps) => {
+const Directory = ({ categories }: DirectoryProps) => {
   return (
-    <>
+    <div className="directory-container">
       {categories.map((category) => (
         <CategoryItem key={category.id} category={category} />
       ))}
-    </>
+    </div>
   );
 };
 
-export default Categories;
+export default Directory;

@@ -1,5 +1,5 @@
 import React from "react";
-import Categories from "./components/categories/categories";
+import Directory from "./components/directory/directory";
 
 const categories = [
   {
@@ -30,11 +30,7 @@ const categories = [
 ];
 
 const App = () => {
-  return (
-    <div className="categories-container">
-      <Categories categories={categories} />
-    </div>
-  );
+  return <Directory categories={categories} />;
 };
 
 export default App;

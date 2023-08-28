@@ -1,7 +1,7 @@
 import React from "react";
 import { Category } from "../../types";
 
-import "./category-item.styles.scss";
+import "./category-item.scss";
 
 interface CategoryItemProps {
   category: Category;
