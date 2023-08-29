@@ -1,17 +1,19 @@
 import { Link, Outlet } from "react-router-dom";
 import React from "react";
 import { ROUTES } from "../types";
+import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
+
+import "./navigation.scss";
 
 const Navigation = () => (
   <>
     <div className="navigation">
       <Link className="logo-container" to={ROUTES.HOME}>
-        <div>Logo</div>
+        <div>
+          <CrwnLogo className="logo" />
+        </div>
       </Link>
       <div className="nav-links-container">
-        <Link className="nav-link" to={ROUTES.HOME}>
-          HOME
-        </Link>
         <Link className="nav-link" to={ROUTES.SHOP}>
           SHOP
         </Link>
