@@ -29,11 +29,7 @@ const categories = [
   },
 ];
 const Home = () => {
-  return (
-    <div className="home">
-      <Directory categories={categories} />
-    </div>
-  );
+  return <Directory categories={categories} />;
 };
 
 export default Home;
