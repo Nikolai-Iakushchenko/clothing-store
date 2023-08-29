@@ -3,14 +3,22 @@ import React from "react";
 import { ROUTES } from "../types";
 
 const Navigation = () => (
-  <div>
-    <div>
-      <h1>Navigation Bar</h1>
-      <Link to={ROUTES.HOME}>Home</Link>
-      <Link to={ROUTES.SHOP}>Shop</Link>
+  <>
+    <div className="navigation">
+      <Link className="logo-container" to={ROUTES.HOME}>
+        <div>Logo</div>
+      </Link>
+      <div className="nav-links-container">
+        <Link className="nav-link" to={ROUTES.HOME}>
+          HOME
+        </Link>
+        <Link className="nav-link" to={ROUTES.SHOP}>
+          SHOP
+        </Link>
+      </div>
     </div>
     <Outlet />
-  </div>
+  </>
 );
 
 export default Navigation;
