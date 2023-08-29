@@ -1,5 +1,6 @@
 import React from "react";
 import Directory from "./components/directory/directory";
+import { Link, Route, Routes } from "react-router-dom";
 
 const categories = [
   {
@@ -29,8 +30,28 @@ const categories = [
   },
 ];
 
+enum ROUTES {
+  HOME = "/",
+  ANOTHER_PAGE = "another-page",
+}
+
 const App = () => {
-  return <Directory categories={categories} />;
+  return (
+    <>
+      <header>
+        Header
+        <Link to={ROUTES.HOME}>Home</Link>
+        <Link to={ROUTES.ANOTHER_PAGE}>Another page</Link>
+      </header>
+      <Routes>
+        <Route
+          path={ROUTES.HOME}
+          element={<Directory categories={categories} />}
+        />
+        <Route path={ROUTES.ANOTHER_PAGE} element={"another page"} />
+      </Routes>
+    </>
+  );
 };
 
 export default App;
