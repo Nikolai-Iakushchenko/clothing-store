@@ -11,6 +11,13 @@ const SignUpForm = () => {
   const { displayName, email, password, confirmPassword } = formFields;
 
   console.log("formFields", formFields);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    //   todo confirm that passwords match
+    // todo see if we authenticated user with email and password
+    //todo create a user document from what createAuthUserWithEmailAndPassword returns
+  };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 

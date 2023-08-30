@@ -4,6 +4,7 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { UserAuth } from "./types";
@@ -31,6 +32,8 @@ export const signInWithGooglePopup = () =>
 export const db = getFirestore();
 
 export const createUserDocumentFromAuth = async (userAuth: UserAuth) => {
+  if (!userAuth) return;
+
   const userDocRef = doc(db, "users", userAuth.uid);
 
   console.log("userDocRef", userDocRef);
@@ -54,4 +57,13 @@ export const createUserDocumentFromAuth = async (userAuth: UserAuth) => {
   }
 
   return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (
+  email: string,
+  password: string,
+) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
