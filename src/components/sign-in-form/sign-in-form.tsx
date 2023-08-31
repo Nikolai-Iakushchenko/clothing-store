@@ -36,7 +36,18 @@ const SignInForm = () => {
       );
       console.log("response", response);
       resetFormFields();
-    } catch (error: any) {}
+    } catch (error: any) {
+      switch (error.code) {
+        case "auth/wrong-password":
+          alert("Password is incorrect");
+          break;
+        case "auth/user-not-found":
+          alert("No user associated with this email");
+          break;
+        default:
+          console.error(error);
+      }
+    }
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
