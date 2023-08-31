@@ -33,7 +33,7 @@ export const signInWithGooglePopup = () =>
 
 export const db = getFirestore();
 
-export interface UserAuth {
+export interface User {
   uid: string;
   displayName: string | null;
   email: string | null;
@@ -42,17 +42,14 @@ export interface UserAuth {
 interface AdditionalInformation {}
 
 export const createUserDocumentFromAuth = async (
-  userAuth: UserAuth,
+  userAuth: User,
   additionalInformation: AdditionalInformation = {},
 ) => {
   if (!userAuth) return;
 
   const userDocRef = doc(db, "users", userAuth.uid);
 
-  console.log("userDocRef", userDocRef);
-
   const userSnapshot = await getDoc(userDocRef);
-  console.log(userSnapshot.exists());
 
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
@@ -93,5 +90,6 @@ export const signInAuthUserWithEmailAndPassword = async (
 
 export const signOutUser = async () => signOut(auth);
 
-export const onAuthStateChangedListener = (callback: (user: unknown) => void) =>
-  onAuthStateChanged(auth, callback);
+export const onAuthStateChangedListener = (
+  callback: (user: User | null) => void,
+) => onAuthStateChanged(auth, callback);
