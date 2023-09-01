@@ -5,9 +5,14 @@ import {
   User,
 } from "../utils/firebase/firebase.utils";
 
-export const UserContext = createContext({
+interface UserContextType {
+  currentUser: User | null;
+  setCurrentUser: (user: User) => User | null;
+}
+
+export const UserContext = createContext<UserContextType>({
   currentUser: null,
-  setCurrentUser: (user: any) => null,
+  setCurrentUser: (user) => null,
 });
 
 interface UserProviderProps {
