@@ -4,8 +4,7 @@ import Home from "./routes/home/home";
 import Navigation from "./routes/navigation/navigation";
 import { ROUTES } from "./routes/types";
 import Authentication from "./routes/authentication/authentication";
-
-const Shop = () => <div>Shop</div>;
+import Shop from "./routes/shop/shop";
 
 const App = () => {
   return (
