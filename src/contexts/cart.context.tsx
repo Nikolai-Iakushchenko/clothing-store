@@ -12,6 +12,7 @@ export interface CartContextType {
   >;
   cartItems: CartItemObj[];
   addItemToCart: (productToAdd: Product) => void;
+  quantity: number;
 }
 
 const addCartItem = (
@@ -36,6 +37,7 @@ export const CartContext = createContext<CartContextType>({
   setIsCartOpen: (): void => {},
   cartItems: [],
   addItemToCart: () => {},
+  quantity: 0,
 });
 
 export interface CartProviderProps {
@@ -46,9 +48,15 @@ export const CartProvider = ({
   children,
 }: CartProviderProps) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState<CartItemObj[]>(
+    [],
+  );
+
+  const quantity = cartItems.reduce((sum, item) => {
+    return sum + item.quantity;
+  }, 0);
+
   const addItemToCart = (productToAdd: Product) => {
-    // @ts-ignore
     setCartItems(addCartItem(cartItems, productToAdd));
   };
 
@@ -57,6 +65,7 @@ export const CartProvider = ({
     setIsCartOpen,
     addItemToCart,
     cartItems,
+    quantity,
   };
 
   return (
