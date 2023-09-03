@@ -1,5 +1,8 @@
-import React from "react";
-import { CartItemObj } from "../../contexts/cart.context";
+import React, { useContext } from "react";
+import {
+  CartContext,
+  CartItemObj,
+} from "../../contexts/cart.context";
 
 interface CheckoutItemProps {
   item: CartItemObj;
@@ -7,17 +10,33 @@ interface CheckoutItemProps {
 
 const CheckoutItem = ({ item }: CheckoutItemProps) => {
   const { imageUrl, name, quantity, price } = item;
+  const {
+    addItemToCart,
+    decrementItemInTheCart,
+    removeItemFromCart,
+  } = useContext(CartContext);
+
+  const decrement = () => {
+    decrementItemInTheCart(item);
+  };
+  const increment = () => {
+    addItemToCart(item);
+  };
+
+  const remove = () => {
+    removeItemFromCart(item);
+  };
 
   return (
     <div>
       <img src={imageUrl} alt={name} />
       <span>{name}</span>
       <span>
-        <button>{"<"}</button>
+        <button onClick={decrement}>{"<"}</button>
         {quantity}
-        <button>{">"}</button>
+        <button onClick={increment}>{">"}</button>
         {price}
-        <button>x</button>
+        <button onClick={remove}>x</button>
       </span>
     </div>
   );
