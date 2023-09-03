@@ -18,21 +18,17 @@ const addCartItem = (
   cartItems: CartItem[],
   productToAdd: Product,
 ) => {
-  console.log("productToAdd", productToAdd);
-  //find if cartItems contains productToAdd
-  // If found, increment quantity
-  const cartItemIndex = cartItems.findIndex(
+  const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id,
   );
-  console.log("cartItemIndex", cartItemIndex);
-  if (cartItemIndex !== -1) {
-    cartItems[cartItemIndex].quantity++;
-  } else {
-    cartItems.push({ ...productToAdd, quantity: 1 });
+  if (existingCartItem) {
+    return cartItems.map((cartItem) =>
+      cartItem.id === productToAdd.id
+        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        : cartItem,
+    );
   }
-  // return new array with modified cartItems/new cart item
-  console.log("cartItems", cartItems);
-  return cartItems;
+  return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
 export const CartContext = createContext<CartContextType>({
@@ -59,8 +55,8 @@ export const CartProvider = ({
   const value = {
     isCartOpen,
     setIsCartOpen,
-    cartItems,
     addItemToCart,
+    cartItems,
   };
 
   return (

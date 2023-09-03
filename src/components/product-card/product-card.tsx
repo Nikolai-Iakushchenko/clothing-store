@@ -12,8 +12,9 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const { name, price, imageUrl } = product;
-
   const { addItemToCart } = useContext(CartContext);
+
+  const addProductToCart = () => addItemToCart(product);
 
   return (
     <div className="product-card-container">
@@ -23,8 +24,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <span className="price">{price}</span>
       </footer>
       <Button
-        // @ts-ignore
-        onClick={() => addItemToCart(product)}
+        onClick={addProductToCart}
         buttonType={ButtonTypeClasses.inverted}
       >
         Add to card
