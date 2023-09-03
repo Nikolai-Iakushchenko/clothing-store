@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Product } from "./products.context";
 
 export interface CartItemObj extends Product {
@@ -12,7 +12,7 @@ export interface CartContextType {
   >;
   cartItems: CartItemObj[];
   addItemToCart: (productToAdd: Product) => void;
-  quantity: number;
+  cartCount: number;
 }
 
 const addCartItem = (
@@ -37,7 +37,7 @@ export const CartContext = createContext<CartContextType>({
   setIsCartOpen: (): void => {},
   cartItems: [],
   addItemToCart: () => {},
-  quantity: 0,
+  cartCount: 0,
 });
 
 export interface CartProviderProps {
@@ -51,10 +51,15 @@ export const CartProvider = ({
   const [cartItems, setCartItems] = useState<CartItemObj[]>(
     [],
   );
+  const [cartCount, setCartCount] = useState(0);
 
-  const quantity = cartItems.reduce((sum, item) => {
-    return sum + item.quantity;
-  }, 0);
+  useEffect(() => {
+    const newCartCount = cartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity,
+      0,
+    );
+    setCartCount(newCartCount);
+  }, [cartItems]);
 
   const addItemToCart = (productToAdd: Product) => {
     setCartItems(addCartItem(cartItems, productToAdd));
@@ -65,7 +70,7 @@ export const CartProvider = ({
     setIsCartOpen,
     addItemToCart,
     cartItems,
-    quantity,
+    cartCount,
   };
 
   return (
