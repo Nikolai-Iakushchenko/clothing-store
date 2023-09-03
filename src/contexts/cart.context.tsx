@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { Product } from "./products.context";
 
-interface CartItem extends Product {
+export interface CartItemObj extends Product {
   quantity: number;
 }
 
@@ -10,12 +10,12 @@ export interface CartContextType {
   setIsCartOpen: React.Dispatch<
     React.SetStateAction<boolean>
   >;
-  cartItems: CartItem[];
+  cartItems: CartItemObj[];
   addItemToCart: (productToAdd: Product) => void;
 }
 
 const addCartItem = (
-  cartItems: CartItem[],
+  cartItems: CartItemObj[],
   productToAdd: Product,
 ) => {
   const existingCartItem = cartItems.find(

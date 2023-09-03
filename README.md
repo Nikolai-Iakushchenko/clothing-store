@@ -2,7 +2,7 @@ Tech stack:
 React, Context, Typescript, Firebase
 
 todo:
-toggle showing the dropdown
 
-- make context with info about items in the cart and if it's open
-- open cart on click
+1) accumulate all the quantities
+2) store inside cart context
+3) utilize

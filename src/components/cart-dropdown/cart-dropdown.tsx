@@ -9,10 +9,11 @@ const CartDropdown = () => {
 
   return (
     <div className="cart-dropdown-container">
-      <div className="cart-items"></div>
-      {cartItems.map((item) => (
-        <CartItem key={item.id} cartItem={item} />
-      ))}
+      <div className="cart-items">
+        {cartItems.map((item) => (
+          <CartItem key={item.id} cartItem={item} />
+        ))}
+      </div>
       <Button>GO TO CHECKOUT</Button>
     </div>
   );
