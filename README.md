@@ -3,6 +3,9 @@ React, Context, Typescript, Firebase
 
 todo:
 
-1) accumulate all the quantities
-2) store inside cart context
-3) utilize
+- implement checkout button
+- that takes to ckeck-out state
+- with all the ckeckout items there (
+    - how to increment/decremenbt the item from the arrows
+    - remove items
+    - add total value
