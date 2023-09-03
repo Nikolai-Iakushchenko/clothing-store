@@ -18,17 +18,28 @@ const addCartItem = (
   cartItems: CartItem[],
   productToAdd: Product,
 ) => {
+  console.log("productToAdd", productToAdd);
   //find if cartItems contains productToAdd
-  // If found, increment quantitity
+  // If found, increment quantity
+  const cartItemIndex = cartItems.findIndex(
+    (cartItem) => cartItem.id === productToAdd.id,
+  );
+  console.log("cartItemIndex", cartItemIndex);
+  if (cartItemIndex !== -1) {
+    cartItems[cartItemIndex].quantity++;
+  } else {
+    cartItems.push({ ...productToAdd, quantity: 1 });
+  }
   // return new array with modified cartItems/new cart item
-  return [];
+  console.log("cartItems", cartItems);
+  return cartItems;
 };
 
 export const CartContext = createContext<CartContextType>({
   isCartOpen: false,
-  setIsCartOpen: (isCartOpen): void => {},
+  setIsCartOpen: (): void => {},
   cartItems: [],
-  addItemToCart: (productToAdd: Product) => {},
+  addItemToCart: () => {},
 });
 
 export interface CartProviderProps {
@@ -41,6 +52,7 @@ export const CartProvider = ({
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const addItemToCart = (productToAdd: Product) => {
+    // @ts-ignore
     setCartItems(addCartItem(cartItems, productToAdd));
   };
 
