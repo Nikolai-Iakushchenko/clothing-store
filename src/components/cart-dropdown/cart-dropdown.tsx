@@ -4,7 +4,10 @@ import Button from "../button/button";
 
 const CartDropdown = () => {
   return (
-    <div className="cart-dropdown-container">
+    <div
+      style={{ display: "hidden" }}
+      className="cart-dropdown-container"
+    >
       <div className="cart-items"></div>
       <Button>GO TO CHECKOUT</Button>
     </div>
