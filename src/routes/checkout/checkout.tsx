@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
-import CheckoutItem from "../../components/CheckoutItem/CheckoutItem";
+import CheckoutItem from "../../components/checkout-item/checkout-item";
 import "./checkout.scss";
 
 const Checkout = () => {
@@ -11,14 +11,31 @@ const Checkout = () => {
   }, 0);
 
   return (
-    <div>
-      <h1>checkout page</h1>
-      <div>
-        {cartItems.map((item) => (
-          <CheckoutItem key={item.id} cartItem={item} />
-        ))}
-      </div>
-      <footer>Total:{total}</footer>
+    <div className="checkout-container">
+      <header className="checkout-header">
+        <div className="header-block">
+          <span>Product</span>
+        </div>
+        <div className="header-block">
+          <span>Description</span>
+        </div>
+        <div className="header-block">
+          <span>Quantity</span>
+        </div>
+        <div className="header-block">
+          <span>Price</span>
+        </div>
+        <div className="header-block">
+          <span>Remove</span>
+        </div>
+      </header>
+      {cartItems.map((cartItem) => (
+        <CheckoutItem
+          key={cartItem.id}
+          cartItem={cartItem}
+        />
+      ))}
+      <span className="total">Total:{total}</span>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import {
   CartContext,
   CartItemObj,
 } from "../../contexts/cart.context";
+import "./checkout-item.scss";
 
 interface CheckoutItemProps {
   cartItem: CartItemObj;
@@ -14,20 +15,24 @@ const CheckoutItem = ({ cartItem }: CheckoutItemProps) => {
     useContext(CartContext);
 
   return (
-    <div>
-      <img src={imageUrl} alt={name} />
-      <h2>{name}</h2>
+    <div className="checkout-item-container">
+      <img
+        className="image-container"
+        src={imageUrl}
+        alt={name}
+      />
+      <span className="name">{name}</span>
       <span onClick={() => removeItemFromCart(cartItem)}>
         {"<"}
       </span>
-      <span>{quantity}</span>
+      <span className="quantity">{quantity}</span>
       <span onClick={() => addItemToCart(cartItem)}>
         {">"}
       </span>
-      {price}
-      <button onClick={() => removeItemFromCart(cartItem)}>
-        x
-      </button>
+      <span className="price">{price}</span>
+      <div onClick={() => removeItemFromCart(cartItem)}>
+        &#10005;
+      </div>
     </div>
   );
 };
