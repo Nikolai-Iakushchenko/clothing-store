@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-import { addCollectionAndDocuments } from "../utils/firebase/firebase.utils";
+import { getCategoriesAndDocuments } from "../utils/firebase/firebase.utils";
 
 export interface Product {
   id: number;
@@ -28,6 +28,15 @@ export const ProductsProvider = ({
   const [products, setProducts] = useState<Product[] | []>(
     [],
   );
+
+  useEffect(() => {
+    const getCategoriesMap = async () => {
+      const categoryMap = await getCategoriesAndDocuments();
+      console.log("categoryMap", categoryMap);
+    };
+
+    getCategoriesMap();
+  }, []);
 
   const value = { products };
 
