@@ -19,7 +19,10 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
-import { Product } from "../../contexts/products.context";
+import {
+  CategoriesMap,
+  Product,
+} from "../../contexts/categories.context";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDqiCDJNd5MaDGUt37xIQq1-o1BI0uTG4A",
@@ -67,18 +70,18 @@ export const addCollectionAndDocuments = async (
   console.log("done");
 };
 
+// export interface CategoryMap {
+//   [key: string]: Product[];
+// }
+
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, "categories");
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
 
-  interface Accumulator {
-    [key: string]: Product[];
-  }
-
   const categoryMap = querySnapshot.docs.reduce(
-    (acc: Accumulator, docSnapshot) => {
+    (acc: CategoriesMap, docSnapshot) => {
       const { title, items } = docSnapshot.data();
       acc[title.toLowerCase()] = items;
       return acc;

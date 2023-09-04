@@ -9,44 +9,45 @@ export interface Product {
   price: number;
 }
 
-export interface ProductsContextType {
-  products: Product[] | [];
+export interface CategoriesMap {
+  [key: string]: Product[];
 }
 
-export const ProductsContext =
-  createContext<ProductsContextType>({
-    products: [],
+export interface CategoriesContextType {
+  categoriesMap: CategoriesMap;
+}
+
+export const CategoriesContext =
+  createContext<CategoriesContextType>({
+    categoriesMap: {},
   });
 
 interface ProductsProviderProps {
   children: React.ReactNode;
 }
 
-export const ProductsProvider = ({
+export const CategoriesProvider = ({
   children,
 }: ProductsProviderProps) => {
-  const [products, setProducts] = useState<Product[] | []>(
-    [],
-  );
+  const [categoriesMap, setCategoriesMap] = useState<
+    CategoriesMap | {}
+  >({});
 
   useEffect(() => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCategoriesAndDocuments();
       console.log("categoryMap", categoryMap);
+      setCategoriesMap(categoryMap);
     };
 
     getCategoriesMap();
   }, []);
 
-  const value = { products };
-
-  useEffect(() => {
-    setProducts([]);
-  }, []);
+  const value = { categoriesMap };
 
   return (
-    <ProductsContext.Provider value={value}>
+    <CategoriesContext.Provider value={value}>
       {children}
-    </ProductsContext.Provider>
+    </CategoriesContext.Provider>
   );
 };

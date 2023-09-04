@@ -3,7 +3,7 @@ import "./product-card.scss";
 import Button, {
   ButtonTypeClasses,
 } from "../button/button";
-import { Product } from "../../contexts/products.context";
+import { Product } from "../../contexts/categories.context";
 import { CartContext } from "../../contexts/cart.context";
 
 interface ProductCardProps {
