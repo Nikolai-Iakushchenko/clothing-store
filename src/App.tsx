@@ -6,6 +6,7 @@ import { ROUTES } from "./routes/types";
 import Authentication from "./routes/authentication/authentication";
 import Shop from "./routes/shop/shop";
 import Checkout from "./routes/checkout/checkout";
+import CategoryPreview from "./routes/category-preview/category-preview";
 
 const App = () => {
   return (
@@ -21,6 +22,10 @@ const App = () => {
           <Route
             path={ROUTES.CHECKOUT}
             element={<Checkout />}
+          />
+          <Route
+            path={`${ROUTES.SHOP}/:categoryTitle`}
+            element={<CategoryPreview />}
           />
         </Route>
       </Routes>
