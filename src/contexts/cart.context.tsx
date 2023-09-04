@@ -13,7 +13,6 @@ export interface CartContextType {
   cartItems: CartItemObj[];
   addItemToCart: (productToAdd: Product) => void;
   removeItemFromCart: (item: CartItemObj) => void;
-  decrementItemInTheCart: (item: CartItemObj) => void;
   cartCount: number;
 }
 
@@ -36,26 +35,25 @@ const addCartItem = (
 
 const removeCartItem = (
   cartItems: CartItemObj[],
-  itemToRemove: CartItemObj,
+  cartItemToRemove: CartItemObj,
 ) => {
-  console.log("cartItems", cartItems);
-  console.log("itemToRemove.id", itemToRemove.id);
-  return cartItems.filter((item) => {
-    console.log("item.id", item.id);
-    return item.id !== itemToRemove.id;
-  });
-};
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === cartItemToRemove.id,
+  );
 
-const decrementCartItems = (
-  cartItems: CartItemObj[],
-  itemToDecrement: CartItemObj,
-) => {
+  if (existingCartItem?.quantity === 1) {
+    return cartItems.filter((cartItem) => {
+      return cartItem.id !== cartItemToRemove.id;
+    });
+  }
+
   return cartItems.map((cartItem) =>
-    cartItem.id === itemToDecrement.id
+    cartItem.id === cartItemToRemove.id
       ? { ...cartItem, quantity: cartItem.quantity - 1 }
       : cartItem,
   );
 };
+
 export const CartContext = createContext<CartContextType>({
   isCartOpen: false,
   setIsCartOpen: (): void => {},
@@ -63,7 +61,6 @@ export const CartContext = createContext<CartContextType>({
   addItemToCart: () => {},
   cartCount: 0,
   removeItemFromCart: () => {},
-  decrementItemInTheCart: () => {},
 });
 
 export interface CartProviderProps {
@@ -91,17 +88,12 @@ export const CartProvider = ({
     setCartItems(addCartItem(cartItems, productToAdd));
   };
 
-  const removeItemFromCart = (item: CartItemObj) => {
-    console.log("removeItemFromCart!!");
-    setCartItems(removeCartItem(cartItems, item));
-  };
-
-  const decrementItemInTheCart = (item: CartItemObj) => {
-    if (item.quantity === 1) {
-      return removeItemFromCart(item);
-    }
-
-    setCartItems(decrementCartItems(cartItems, item));
+  const removeItemFromCart = (
+    cartItemToRemove: CartItemObj,
+  ) => {
+    setCartItems(
+      removeCartItem(cartItems, cartItemToRemove),
+    );
   };
 
   const value = {
@@ -111,7 +103,6 @@ export const CartProvider = ({
     cartItems,
     cartCount,
     removeItemFromCart,
-    decrementItemInTheCart,
   };
 
   return (

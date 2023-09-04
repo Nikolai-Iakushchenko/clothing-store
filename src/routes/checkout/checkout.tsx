@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
 import CheckoutItem from "../../components/CheckoutItem/CheckoutItem";
+import "./checkout.scss";
 
 const Checkout = () => {
-  const { cartItems, addItemToCart } =
-    useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
 
   const total = cartItems.reduce((sum, cartItem) => {
     return sum + cartItem.quantity * cartItem.price;
@@ -12,12 +12,12 @@ const Checkout = () => {
 
   return (
     <div>
-      <header>
-        Product Description Quantity Price Remove
-      </header>
-      {cartItems.map((item) => (
-        <CheckoutItem item={item} />
-      ))}
+      <h1>checkout page</h1>
+      <div>
+        {cartItems.map((item) => (
+          <CheckoutItem key={item.id} cartItem={item} />
+        ))}
+      </div>
       <footer>Total:{total}</footer>
     </div>
   );

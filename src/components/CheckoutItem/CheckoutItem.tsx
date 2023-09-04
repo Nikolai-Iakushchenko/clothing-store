@@ -5,39 +5,29 @@ import {
 } from "../../contexts/cart.context";
 
 interface CheckoutItemProps {
-  item: CartItemObj;
+  cartItem: CartItemObj;
 }
 
-const CheckoutItem = ({ item }: CheckoutItemProps) => {
-  const { imageUrl, name, quantity, price } = item;
-  const {
-    addItemToCart,
-    decrementItemInTheCart,
-    removeItemFromCart,
-  } = useContext(CartContext);
-
-  const decrement = () => {
-    decrementItemInTheCart(item);
-  };
-  const increment = () => {
-    addItemToCart(item);
-  };
-
-  const remove = () => {
-    removeItemFromCart(item);
-  };
+const CheckoutItem = ({ cartItem }: CheckoutItemProps) => {
+  const { imageUrl, name, quantity, price } = cartItem;
+  const { addItemToCart, removeItemFromCart } =
+    useContext(CartContext);
 
   return (
     <div>
       <img src={imageUrl} alt={name} />
-      <span>{name}</span>
-      <span>
-        <button onClick={decrement}>{"<"}</button>
-        {quantity}
-        <button onClick={increment}>{">"}</button>
-        {price}
-        <button onClick={remove}>x</button>
+      <h2>{name}</h2>
+      <span onClick={() => removeItemFromCart(cartItem)}>
+        {"<"}
       </span>
+      <span>{quantity}</span>
+      <span onClick={() => addItemToCart(cartItem)}>
+        {">"}
+      </span>
+      {price}
+      <button onClick={() => removeItemFromCart(cartItem)}>
+        x
+      </button>
     </div>
   );
 };
