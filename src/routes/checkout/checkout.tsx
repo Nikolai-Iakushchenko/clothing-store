@@ -4,11 +4,7 @@ import CheckoutItem from "../../components/checkout-item/checkout-item";
 import "./checkout.scss";
 
 const Checkout = () => {
-  const { cartItems } = useContext(CartContext);
-
-  const total = cartItems.reduce((sum, cartItem) => {
-    return sum + cartItem.quantity * cartItem.price;
-  }, 0);
+  const { cartItems, cartTotal } = useContext(CartContext);
 
   return (
     <div className="checkout-container">
@@ -35,7 +31,7 @@ const Checkout = () => {
           cartItem={cartItem}
         />
       ))}
-      <span className="total">Total:{total}</span>
+      <span className="total">Total: ${cartTotal}</span>
     </div>
   );
 };
