@@ -17,6 +17,7 @@ import {
   collection,
   writeBatch,
 } from "firebase/firestore";
+import { Product } from "../../contexts/products.context";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDqiCDJNd5MaDGUt37xIQq1-o1BI0uTG4A",
@@ -40,11 +41,28 @@ export const signInWithGooglePopup = () =>
 
 export const db = getFirestore();
 
+interface ObjectToAdd {
+  title: string;
+  items: Product[];
+}
+
 export const addCollectionAndDocuments = async (
-  colletionKey,
-  objectsToAdd,
+  colletionKey: string,
+  objectsToAdd: ObjectToAdd[],
 ) => {
   const collectionRef = collection(db, colletionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(
+      collectionRef,
+      object.title.toLowerCase(),
+    );
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log("done");
 };
 
 export interface User {

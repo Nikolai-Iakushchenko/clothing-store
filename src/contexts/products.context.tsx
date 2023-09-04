@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-import SHOP_DATA from "../shop-data.js";
+import { addCollectionAndDocuments } from "../utils/firebase/firebase.utils";
 
 export interface Product {
   id: number;
@@ -28,6 +28,7 @@ export const ProductsProvider = ({
   const [products, setProducts] = useState<Product[] | []>(
     [],
   );
+
   const value = { products };
 
   useEffect(() => {
