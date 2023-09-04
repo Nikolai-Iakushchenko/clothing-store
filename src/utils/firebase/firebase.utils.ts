@@ -73,10 +73,12 @@ export const getCategoriesAndDocuments = async () => {
 
   const querySnapshot = await getDocs(q);
 
-  interface Accumulator {}
+  interface Accumulator {
+    [key: string]: Product[];
+  }
 
   const categoryMap = querySnapshot.docs.reduce(
-    (acc: any, docSnapshot) => {
+    (acc: Accumulator, docSnapshot) => {
       const { title, items } = docSnapshot.data();
       acc[title.toLowerCase()] = items;
       return acc;
