@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-import PRODUCTS from "../shop-data.json";
+import SHOP_DATA from "../shop-data.js";
 
 export interface Product {
   id: number;
@@ -13,20 +13,25 @@ export interface ProductsContextType {
   products: Product[] | [];
 }
 
-export const ProductsContext = createContext<ProductsContextType>({
-  products: [],
-});
+export const ProductsContext =
+  createContext<ProductsContextType>({
+    products: [],
+  });
 
 interface ProductsProviderProps {
   children: React.ReactNode;
 }
 
-export const ProductsProvider = ({ children }: ProductsProviderProps) => {
-  const [products, setProducts] = useState<Product[] | []>([]);
+export const ProductsProvider = ({
+  children,
+}: ProductsProviderProps) => {
+  const [products, setProducts] = useState<Product[] | []>(
+    [],
+  );
   const value = { products };
 
   useEffect(() => {
-    setProducts(PRODUCTS);
+    setProducts([]);
   }, []);
 
   return (

@@ -9,7 +9,14 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDqiCDJNd5MaDGUt37xIQq1-o1BI0uTG4A",
@@ -32,6 +39,13 @@ export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 
 export const db = getFirestore();
+
+export const addCollectionAndDocuments = async (
+  colletionKey,
+  objectsToAdd,
+) => {
+  const collectionRef = collection(db, colletionKey);
+};
 
 export interface User {
   uid: string;
@@ -76,7 +90,11 @@ export const createAuthUserWithEmailAndPassword = async (
 ) => {
   if (!email || !password) return;
 
-  return await createUserWithEmailAndPassword(auth, email, password);
+  return await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
 };
 
 export const signInAuthUserWithEmailAndPassword = async (
@@ -85,7 +103,11 @@ export const signInAuthUserWithEmailAndPassword = async (
 ) => {
   if (!email || !password) return;
 
-  return await signInWithEmailAndPassword(auth, email, password);
+  return await signInWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
 };
 
 export const signOutUser = async () => signOut(auth);
