@@ -1,24 +1,24 @@
 import React from "react";
 import { Category } from "../../types";
 
-import "./category-item.scss";
+import "./directory-item.scss";
 
 interface CategoryItemProps {
   category: Category;
 }
 
-const CategoryItem = ({ category }: CategoryItemProps) => {
+const DirectoryItem = ({ category }: CategoryItemProps) => {
   const { imageUrl, title } = category;
 
   return (
-    <div className="category-item-container">
+    <div className="directory-item-container">
       <div
         className="background-image"
         style={{
           backgroundImage: `url(${imageUrl})`,
         }}
       />
-      <div className="category-body-container">
+      <div className="body">
         <h2>{title}</h2>
         <p>Shop Now</p>
       </div>
@@ -26,4 +26,4 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
   );
 };
 
-export default CategoryItem;
+export default DirectoryItem;

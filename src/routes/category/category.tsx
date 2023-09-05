@@ -26,20 +26,25 @@ const Category = () => {
   }, [category, categoriesMap]);
 
   return (
-    <div className="category-container">
-      {products &&
-        products.map((product) => {
-          console.log("product", product);
-          if (!product) return null;
+    <>
+      <h2 className="category-title">
+        {category?.toUpperCase()}
+      </h2>
+      <div className="category-container">
+        {products &&
+          products.map((product) => {
+            console.log("product", product);
+            if (!product) return null;
 
-          return (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
-          );
-        })}
-    </div>
+            return (
+              <ProductCard
+                key={product.id}
+                product={product}
+              />
+            );
+          })}
+      </div>
+    </>
   );
 };
 

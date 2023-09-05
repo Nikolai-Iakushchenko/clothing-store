@@ -2,6 +2,7 @@ import React from "react";
 import { Product } from "../../contexts/categories.context";
 import ProductCard from "../product-card/product-card";
 import "./category-preview.scss";
+import { Link } from "react-router-dom";
 
 interface CaterogyPreviewProps {
   title: string;
@@ -14,7 +15,9 @@ const CaterogyPreview = ({
 }: CaterogyPreviewProps) => (
   <div className="category-preview-container">
     <h2>
-      <span className="title">{title.toUpperCase()}</span>
+      <Link to={title} className="title">
+        {title.toUpperCase()}
+      </Link>
     </h2>
     <div className="preview">
       {products
