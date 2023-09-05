@@ -14,20 +14,31 @@ import "./category.scss";
 const Category = () => {
   const { category } = useParams();
   const { categoriesMap } = useContext(CategoriesContext);
+
   const [products, setProducts] = useState<Product[]>([
+    // @ts-ignore
     categoriesMap[category],
   ]);
 
   useEffect(() => {
+    // @ts-ignore
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
 
   return (
     <div className="category-container">
       {products &&
-        products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        products.map((product) => {
+          console.log("product", product);
+          if (!product) return null;
+
+          return (
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
+          );
+        })}
     </div>
   );
 };
