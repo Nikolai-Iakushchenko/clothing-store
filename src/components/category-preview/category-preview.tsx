@@ -1,6 +1,6 @@
 import React from "react";
 import { Product } from "../../contexts/categories.context";
-import ProductCard from "../../components/product-card/product-card";
+import ProductCard from "../product-card/product-card";
 import "./category-preview.scss";
 
 interface CaterogyPreviewProps {
