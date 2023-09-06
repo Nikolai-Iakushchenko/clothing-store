@@ -1,8 +1,11 @@
 import React from "react";
 import { Product } from "../../contexts/categories.context";
 import ProductCard from "../product-card/product-card";
-import "./category-preview.scss";
-import { Link } from "react-router-dom";
+import {
+  CategoryPreviewContainer,
+  Preview,
+  TitleLink,
+} from "./category-preview.styles";
 
 interface CaterogyPreviewProps {
   title: string;
@@ -13,20 +16,20 @@ const CaterogyPreview = ({
   title,
   products,
 }: CaterogyPreviewProps) => (
-  <div className="category-preview-container">
+  <CategoryPreviewContainer>
     <h2>
-      <Link to={title} className="title">
+      <TitleLink to={title}>
         {title.toUpperCase()}
-      </Link>
+      </TitleLink>
     </h2>
-    <div className="preview">
+    <Preview>
       {products
         .filter((_, index) => index < 3)
         .map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-    </div>
-  </div>
+    </Preview>
+  </CategoryPreviewContainer>
 );
 
 export default CaterogyPreview;
