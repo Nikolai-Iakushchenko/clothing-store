@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormInput from "../form-input/form-input";
 import Button, {
-  ButtonTypeClasses,
+  BUTTON_TYPES_CLASSES,
 } from "../button/button";
 import {
   createUserDocumentFromAuth,
@@ -93,7 +93,7 @@ const SignInForm = () => {
           <Button
             onClick={signInWithGoogle}
             type="button"
-            buttonType={ButtonTypeClasses.google}
+            buttonType={BUTTON_TYPES_CLASSES.google}
           >
             Google sign in
           </Button>
