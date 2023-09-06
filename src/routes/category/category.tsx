@@ -9,7 +9,10 @@ import {
   Product,
 } from "../../contexts/categories.context";
 import ProductCard from "../../components/product-card/product-card";
-import "./category.scss";
+import {
+  CategoryContainer,
+  CategoryTitle,
+} from "./category.styles";
 
 const Category = () => {
   const { category } = useParams();
@@ -27,10 +30,10 @@ const Category = () => {
 
   return (
     <>
-      <h2 className="category-title">
+      <CategoryTitle>
         {category?.toUpperCase()}
-      </h2>
-      <div className="category-container">
+      </CategoryTitle>
+      <CategoryContainer>
         {products &&
           products.map((product) => {
             console.log("product", product);
@@ -43,7 +46,7 @@ const Category = () => {
               />
             );
           })}
-      </div>
+      </CategoryContainer>
     </>
   );
 };
