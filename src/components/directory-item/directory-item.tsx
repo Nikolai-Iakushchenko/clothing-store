@@ -1,7 +1,12 @@
 import React from "react";
 import { Category } from "../../types";
 
-import "./directory-item.scss";
+import "./directory-item.styles";
+import {
+  BackgroundImage,
+  Body,
+  DirectoryItemContainer,
+} from "./directory-item.styles";
 
 interface CategoryItemProps {
   category: Category;
@@ -11,18 +16,17 @@ const DirectoryItem = ({ category }: CategoryItemProps) => {
   const { imageUrl, title } = category;
 
   return (
-    <div className="directory-item-container">
-      <div
-        className="background-image"
+    <DirectoryItemContainer>
+      <BackgroundImage
         style={{
           backgroundImage: `url(${imageUrl})`,
         }}
       />
-      <div className="body">
+      <Body>
         <h2>{title}</h2>
         <p>Shop Now</p>
-      </div>
-    </div>
+      </Body>
+    </DirectoryItemContainer>
   );
 };
 
