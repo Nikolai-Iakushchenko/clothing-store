@@ -1,6 +1,10 @@
 import React from "react";
 
-import "./form-input.scss";
+import {
+  FormInputLabel,
+  Group,
+  Input,
+} from "./form-input.styles";
 
 interface FormInputProps {
   label: string;
@@ -8,20 +12,19 @@ interface FormInputProps {
   [x: string]: any;
 }
 
-const FormInput = ({ label, ...otherProps }: FormInputProps) => {
+const FormInput = ({
+  label,
+  ...otherProps
+}: FormInputProps) => {
   return (
-    <div className="group">
-      <input className="form-input" {...otherProps} />
+    <Group>
+      <Input {...otherProps} />
       {label && (
-        <label
-          className={`${
-            otherProps.value.length ? "shrink" : ""
-          } form-input-label`}
-        >
+        <FormInputLabel shrink={otherProps.value.length}>
           {label}
-        </label>
+        </FormInputLabel>
       )}
-    </div>
+    </Group>
   );
 };
 
