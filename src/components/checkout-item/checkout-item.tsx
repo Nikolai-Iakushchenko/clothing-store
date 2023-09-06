@@ -3,7 +3,17 @@ import {
   CartContext,
   CartItemObj,
 } from "../../contexts/cart.context";
-import "./checkout-item.scss";
+import "./checkout-item.styles";
+import {
+  Arrow,
+  CheckoutItemContainer,
+  ImageContainer,
+  Name,
+  Price,
+  Quantity,
+  RemoveButton,
+  Value,
+} from "./checkout-item.styles";
 
 interface CheckoutItemProps {
   cartItem: CartItemObj;
@@ -26,25 +36,19 @@ const CheckoutItem = ({ cartItem }: CheckoutItemProps) => {
     removeItemFromCart(cartItem);
 
   return (
-    <div className="checkout-item-container">
-      <img
-        className="image-container"
-        src={imageUrl}
-        alt={name}
-      />
-      <span className="name">{name}</span>
-      <span className="quantity">
-        <div className="arrow" onClick={removeItemHandler}>
-          &#10094;
-        </div>
-        <span className="value">{quantity}</span>
-        <div className="arrow" onClick={addItemHandler}>
-          &#10095;
-        </div>
-      </span>
-      <span className="price">{price}</span>
-      <div onClick={clearItemHandler}>&#10005;</div>
-    </div>
+    <CheckoutItemContainer>
+      <ImageContainer src={imageUrl} alt={name} />
+      <Name>{name}</Name>
+      <Quantity>
+        <Arrow onClick={removeItemHandler}>&#10094;</Arrow>
+        <Value>{quantity}</Value>
+        <Arrow onClick={addItemHandler}>&#10095;</Arrow>
+      </Quantity>
+      <Price>{price}</Price>
+      <RemoveButton onClick={clearItemHandler}>
+        &#10005;
+      </RemoveButton>
+    </CheckoutItemContainer>
   );
 };
 
