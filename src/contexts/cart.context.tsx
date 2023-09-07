@@ -1,11 +1,8 @@
 import {
   createContext,
-  useEffect,
   useReducer,
-  useState,
 } from "react";
 import { Product } from "./categories.context";
-import { Action } from "./user.context";
 
 export interface CartItemObj extends Product {
   quantity: number;
@@ -84,8 +81,6 @@ export const CartContext = createContext<CartContextType>({
 export const CART_ACTION_TYPES = {
   SET_IS_CART_OPEN: "SET_IS_CART_OPEN",
   SET_CART_ITEMS: "SET_CART_ITEMS",
-  SET_CART_COUNT: "SET_CART_ITEM",
-  SET_CART_TOTAL: "SET_CART_TOTAL",
 };
 
 export interface CartProviderProps {
@@ -114,12 +109,8 @@ const cartReducer = (
   const { type, payload } = action;
 
   switch (type) {
-    // case CART_ACTION_TYPES.SET_CART_COUNT:
-    //   return { ...state, cartCount: payload };
-    // case CART_ACTION_TYPES.SET_CART_TOTAL:
-    //   return { ...state, cartTotal: payload };
-    // case CART_ACTION_TYPES.SET_IS_CART_OPEN:
-    //   return { ...state, isCartOpen: !state.isCartOpen };
+    case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+      return { ...state, isCartOpen: !state.isCartOpen };
     case CART_ACTION_TYPES.SET_CART_ITEMS:
       return {
         ...state,
@@ -193,9 +184,13 @@ export const CartProvider = ({
     updateCartItemsReducer(newCartItems);
   };
 
+  const setIsCartOpen = () => {
+    dispatch({ type: CART_ACTION_TYPES.SET_IS_CART_OPEN });
+  };
+
   const value = {
     isCartOpen,
-    setIsCartOpen: () => {},
+    setIsCartOpen,
     addItemToCart,
     cartItems,
     cartCount,
