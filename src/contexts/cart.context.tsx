@@ -88,12 +88,23 @@ export const CART_ACTION_TYPES = {
   SET_CART_TOTAL: "SET_CART_TOTAL",
 };
 
+export interface CartProviderProps {
+  children: React.ReactNode;
+}
+
 interface CartState {
   isCartOpen: boolean;
   cartItems: CartItemObj[];
   cartCount: number;
   cartTotal: number;
 }
+
+const INITIAL_STATE: CartState = {
+  isCartOpen: false,
+  cartItems: [],
+  cartTotal: 0,
+  cartCount: 0,
+};
 
 const cartReducer = (
   state: CartState,
@@ -103,33 +114,22 @@ const cartReducer = (
   const { type, payload } = action;
 
   switch (type) {
-    case CART_ACTION_TYPES.SET_CART_COUNT:
-      return { ...state, cartCount: payload };
-    case CART_ACTION_TYPES.SET_CART_TOTAL:
-      return { ...state, cartTotal: payload };
-    case CART_ACTION_TYPES.SET_IS_CART_OPEN:
-      return { ...state, isCartOpen: !state.isCartOpen };
+    // case CART_ACTION_TYPES.SET_CART_COUNT:
+    //   return { ...state, cartCount: payload };
+    // case CART_ACTION_TYPES.SET_CART_TOTAL:
+    //   return { ...state, cartTotal: payload };
+    // case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+    //   return { ...state, isCartOpen: !state.isCartOpen };
     case CART_ACTION_TYPES.SET_CART_ITEMS:
       return {
         ...state,
-        cartItems: [...state.cartItems, payload],
+        ...payload,
       };
     default:
       throw new Error(
         `Unhandled type ${type} in the cartReducer`,
       );
   }
-};
-
-export interface CartProviderProps {
-  children: React.ReactNode;
-}
-
-const INITIAL_STATE: CartState = {
-  isCartOpen: false,
-  cartItems: [],
-  cartTotal: 0,
-  cartCount: 0,
 };
 
 export const CartProvider = ({
@@ -188,6 +188,8 @@ export const CartProvider = ({
     );
     setCartTotal(newCartTotal);
   }, [cartState.cartItems]);
+
+  const updateCatItemsReducer = (newCartItems) => {};
 
   const addItemToCart = (productToAdd: Product) => {
     setCartItems(
