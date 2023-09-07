@@ -1,7 +1,5 @@
 import React from "react";
 import { Category } from "../../types";
-
-import "./directory-item.styles";
 import {
   BackgroundImage,
   Body,
@@ -17,11 +15,7 @@ const DirectoryItem = ({ category }: CategoryItemProps) => {
 
   return (
     <DirectoryItemContainer>
-      <BackgroundImage
-        style={{
-          backgroundImage: `url(${imageUrl})`,
-        }}
-      />
+      <BackgroundImage imageUrl={imageUrl} />
       <Body>
         <h2>{title}</h2>
         <p>Shop Now</p>
