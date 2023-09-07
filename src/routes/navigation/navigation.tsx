@@ -12,6 +12,7 @@ import {
   NavigationContainer,
   NavLink,
   NavLinks,
+  SignOut,
 } from "./navigation.styles";
 
 const Navigation = () => {
@@ -27,16 +28,11 @@ const Navigation = () => {
           </div>
         </LogoContainer>
         <NavLinks>
-          <Link className="nav-link" to={ROUTES.SHOP}>
-            SHOP
-          </Link>
+          <NavLink to={ROUTES.SHOP}>SHOP</NavLink>
           {currentUser ? (
-            <span
-              onClick={signOutUser}
-              className="nav-link"
-            >
+            <SignOut onClick={signOutUser}>
               SIGN OUT
-            </span>
+            </SignOut>
           ) : (
             <NavLink to={ROUTES.AUTH}>SIGN IN</NavLink>
           )}
