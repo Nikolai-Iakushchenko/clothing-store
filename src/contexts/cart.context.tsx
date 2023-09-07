@@ -1,5 +1,6 @@
 import { createContext, useReducer } from "react";
 import { Product } from "./categories.context";
+import { createAction } from "../utils/reducer/reducer.utils";
 
 export interface CartItemObj extends Product {
   quantity: number;
@@ -144,14 +145,13 @@ export const CartProvider = ({
       0,
     );
 
-    dispatch({
-      type: CART_ACTION_TYPES.SET_CART_ITEMS,
-      payload: {
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
         cartItems: newCartItems,
         cartTotal: newCartTotal,
         cartCount: newCartCount,
-      },
-    });
+      }),
+    );
   };
 
   const addItemToCart = (productToAdd: Product) => {
@@ -183,10 +183,12 @@ export const CartProvider = ({
   };
 
   const setIsCartOpen = (bool: boolean) => {
-    dispatch({
-      type: CART_ACTION_TYPES.SET_IS_CART_OPEN,
-      payload: bool,
-    });
+    dispatch(
+      createAction(
+        CART_ACTION_TYPES.SET_IS_CART_OPEN,
+        bool,
+      ),
+    );
   };
 
   const value = {
