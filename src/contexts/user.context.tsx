@@ -8,6 +8,7 @@ import {
   onAuthStateChangedListener,
   User,
 } from "../utils/firebase/firebase.utils";
+import { createAction } from "../utils/reducer/reducer.utils";
 
 interface UserContextType {
   currentUser: User | null;
@@ -68,11 +69,13 @@ export const UserProvider = ({
   console.log("currentUser", currentUser);
 
   const setCurrentUser = (user: User | null) => {
-    // @ts-ignore
-    dispatch({
-      type: USER_ACTION_TYPES.SET_CURRENT_USER,
-      payload: user,
-    });
+    dispatch(
+      // @ts-ignore
+      createAction(
+        USER_ACTION_TYPES.SET_CURRENT_USER,
+        user,
+      ),
+    );
   };
 
   const value = { currentUser, setCurrentUser };
