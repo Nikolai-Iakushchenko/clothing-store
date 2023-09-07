@@ -19,11 +19,11 @@ export const UserContext = createContext<UserContextType>({
   setCurrentUser: () => null,
 });
 
-interface State {
+interface UserState {
   currentUser: User | null;
 }
 
-interface Action {
+export interface Action {
   type: string;
   payload?: User;
 }
@@ -32,7 +32,7 @@ export const USER_ACTION_TYPES = {
   SET_CURRENT_USER: "SET_CURRENT_USER",
 };
 
-const userReducer = (state: State, action: Action) => {
+const userReducer = (state: UserState, action: Action) => {
   console.log("dispatched");
   console.log("action", action);
 
