@@ -2,4 +2,6 @@ Tech stack:
 React, Context, Typescript, Firebase
 
 todo:
-modify Cart Context to use reducers
+update CartReducer and create a setIsCartOpened method,
+that's going to be a function, that updates cartReducer
+with appropriate value for our cart
