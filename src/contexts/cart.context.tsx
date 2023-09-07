@@ -1,7 +1,4 @@
-import {
-  createContext,
-  useReducer,
-} from "react";
+import { createContext, useReducer } from "react";
 import { Product } from "./categories.context";
 
 export interface CartItemObj extends Product {
@@ -10,9 +7,10 @@ export interface CartItemObj extends Product {
 
 export interface CartContextType {
   isCartOpen: boolean;
-  setIsCartOpen: React.Dispatch<
-    React.SetStateAction<boolean>
-  >;
+  // setIsCartOpen: React.Dispatch<
+  //   React.SetStateAction<boolean>
+  // >;
+  setIsCartOpen: (bool: boolean) => void;
   cartItems: CartItemObj[];
   addItemToCart: (productToAdd: Product) => void;
   removeItemFromCart: (item: CartItemObj) => void;
@@ -110,7 +108,7 @@ const cartReducer = (
 
   switch (type) {
     case CART_ACTION_TYPES.SET_IS_CART_OPEN:
-      return { ...state, isCartOpen: !state.isCartOpen };
+      return { ...state, isCartOpen: payload };
     case CART_ACTION_TYPES.SET_CART_ITEMS:
       return {
         ...state,
@@ -184,8 +182,11 @@ export const CartProvider = ({
     updateCartItemsReducer(newCartItems);
   };
 
-  const setIsCartOpen = () => {
-    dispatch({ type: CART_ACTION_TYPES.SET_IS_CART_OPEN });
+  const setIsCartOpen = (bool: boolean) => {
+    dispatch({
+      type: CART_ACTION_TYPES.SET_IS_CART_OPEN,
+      payload: bool,
+    });
   };
 
   const value = {
