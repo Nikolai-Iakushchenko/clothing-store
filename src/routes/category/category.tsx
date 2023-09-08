@@ -31,7 +31,6 @@ const Category = () => {
       <CategoryContainer>
         {products &&
           products.map((product) => {
-            console.log("product", product);
             if (!product) return null;
 
             return (
