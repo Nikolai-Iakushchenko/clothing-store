@@ -8,11 +8,13 @@ import Shop from "./routes/shop/shop";
 import Checkout from "./routes/checkout/checkout";
 import {
   createUserDocumentFromAuth,
+  getCategoriesAndDocuments,
   onAuthStateChangedListener,
   User,
 } from "./utils/firebase/firebase.utils";
 import { setCurrentUser } from "./store/user/user.action";
 import { useDispatch } from "react-redux";
+import { setCategoriesMap } from "./store/categories/category.action";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,6 +30,15 @@ const App = () => {
     );
 
     return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const getCategoriesMap = async () => {
+      const categoryMap = await getCategoriesAndDocuments();
+      dispatch(setCategoriesMap(categoryMap));
+    };
+
+    getCategoriesMap();
   }, []);
 
   return (

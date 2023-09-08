@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { Product } from "./categories.context";
+import { Product } from "../store/categories/category.reducer";
 import { createAction } from "../utils/reducer/reducer.utils";
 
 export interface CartItemObj extends Product {

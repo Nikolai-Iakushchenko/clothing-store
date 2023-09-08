@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import "./product-card.styles";
-import {
-  BUTTON_TYPES_CLASSES,
-} from "../button/button";
-import { Product } from "../../contexts/categories.context";
+import { BUTTON_TYPES_CLASSES } from "../button/button";
+import { Product } from "../../store/categories/category.reducer";
 import { CartContext } from "../../contexts/cart.context";
 import {
   ProductCardButton,

@@ -2,13 +2,19 @@ import {
   CATEGORIES_ACTION_TYPES,
   CategoriesAction,
 } from "./category.types";
-import { Product } from "../../contexts/categories.context";
+
+export interface Product {
+  id: number;
+  name: string;
+  imageUrl: string;
+  price: number;
+}
 
 export interface CategoriesMap {
   [key: string]: Product[];
 }
 
-export interface CategoryState {
+export interface CategoriesState {
   categoriesMap: CategoriesMap;
 }
 
@@ -17,7 +23,7 @@ export const CATEGORIES_INITIAL_STATE = {
 };
 
 export const categoriesReducer = (
-  state: CategoryState = CATEGORIES_INITIAL_STATE,
+  state: CategoriesState = CATEGORIES_INITIAL_STATE,
   action: CategoriesAction | {} = {},
 ) => {
   // @ts-ignore

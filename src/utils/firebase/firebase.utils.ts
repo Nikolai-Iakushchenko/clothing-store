@@ -22,7 +22,7 @@ import {
 import {
   CategoriesMap,
   Product,
-} from "../../contexts/categories.context";
+} from "../../store/categories/category.reducer";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDqiCDJNd5MaDGUt37xIQq1-o1BI0uTG4A",

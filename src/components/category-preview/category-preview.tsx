@@ -1,11 +1,11 @@
 import React from "react";
-import { Product } from "../../contexts/categories.context";
 import ProductCard from "../product-card/product-card";
 import {
   CategoryPreviewContainer,
   Preview,
   TitleLink,
 } from "./category-preview.styles";
+import { Product } from "../../store/categories/category.reducer";
 
 interface CaterogyPreviewProps {
   title: string;
