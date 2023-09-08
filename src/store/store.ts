@@ -16,3 +16,5 @@ export const store = legacy_createStore(
   undefined,
   composedEnhancers,
 );
+
+export type RootState = ReturnType<typeof store.getState>;
