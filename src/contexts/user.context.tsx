@@ -20,42 +20,14 @@ export const UserContext = createContext<UserContextType>({
   setCurrentUser: () => null,
 });
 
-interface UserState {
-  currentUser: User | null;
-}
-
 export interface Action {
   type: string;
   payload?: User;
 }
 
-export const USER_ACTION_TYPES = {
-  SET_CURRENT_USER: "SET_CURRENT_USER",
-};
-
-const userReducer = (state: UserState, action: Action) => {
-  console.log("dispatched");
-  console.log("action", action);
-
-  const { type, payload } = action;
-
-  switch (type) {
-    case USER_ACTION_TYPES.SET_CURRENT_USER:
-      return { ...state, currentUser: payload };
-    default:
-      throw new Error(
-        `Unhandled type ${type} in the userReducer`,
-      );
-  }
-};
-
 interface UserProviderProps {
   children: React.ReactNode;
 }
-
-const INITIAL_STATE = {
-  currentUser: null,
-};
 
 export const UserProvider = ({
   children,
