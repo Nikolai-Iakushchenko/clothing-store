@@ -1,4 +1,3 @@
-import { Action } from "../../contexts/user.context";
 import { User } from "../../utils/firebase/firebase.utils";
 
 export interface UserState {
@@ -12,9 +11,15 @@ export const USER_ACTION_TYPES = {
 const INITIAL_STATE = {
   currentUser: null,
 };
+
+export interface UserAction {
+  type: string;
+  payload: User;
+}
+
 export const userReducer = (
   state: UserState = INITIAL_STATE,
-  action: Action,
+  action: UserAction,
 ) => {
   const { type, payload } = action;
 
