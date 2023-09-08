@@ -1,21 +1,16 @@
 import { User } from "../../utils/firebase/firebase.utils";
+import {
+  USER_ACTION_TYPES,
+  UserAction,
+} from "./user.types";
 
 export interface UserState {
   currentUser: User | null;
 }
 
-export const USER_ACTION_TYPES = {
-  SET_CURRENT_USER: "SET_CURRENT_USER",
-};
-
 const INITIAL_STATE = {
   currentUser: null,
 };
-
-export interface UserAction {
-  type: string;
-  payload: User;
-}
 
 export const userReducer = (
   state: UserState = INITIAL_STATE,
