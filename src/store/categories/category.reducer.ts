@@ -1,25 +1,11 @@
 import {
   CATEGORIES_ACTION_TYPES,
   CategoriesAction,
+  CategoriesState,
 } from "./category.types";
 
-export interface Product {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-}
-
-export interface CategoriesMap {
-  [key: string]: Product[];
-}
-
-export interface CategoriesState {
-  categoriesMap: CategoriesMap;
-}
-
 export const CATEGORIES_INITIAL_STATE = {
-  categoriesMap: {},
+  categories: [],
 };
 
 export const categoriesReducer = (
@@ -30,8 +16,8 @@ export const categoriesReducer = (
   const { type, payload } = action;
 
   switch (type) {
-    case CATEGORIES_ACTION_TYPES.SET_CATEGORIES_MAP:
-      return { ...state, categoriesMap: payload };
+    case CATEGORIES_ACTION_TYPES.SET_CATEGORIES:
+      return { ...state, categories: payload };
     default:
       return state;
   }

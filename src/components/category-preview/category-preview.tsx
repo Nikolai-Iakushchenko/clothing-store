@@ -5,7 +5,7 @@ import {
   Preview,
   TitleLink,
 } from "./category-preview.styles";
-import { Product } from "../../store/categories/category.reducer";
+import { Product } from "../../store/categories/category.types";
 
 interface CaterogyPreviewProps {
   title: string;

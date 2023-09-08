@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Product } from "../../store/categories/category.reducer";
+import { Product } from "../../store/categories/category.types";
 import ProductCard from "../../components/product-card/product-card";
 import {
   CategoryContainer,

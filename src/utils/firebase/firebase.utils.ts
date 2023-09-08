@@ -19,10 +19,7 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
-import {
-  CategoriesMap,
-  Product,
-} from "../../store/categories/category.reducer";
+import { Product } from "../../store/categories/category.types";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDqiCDJNd5MaDGUt37xIQq1-o1BI0uTG4A",
@@ -80,16 +77,9 @@ export const getCategoriesAndDocuments = async () => {
 
   const querySnapshot = await getDocs(q);
 
-  const categoryMap = querySnapshot.docs.reduce(
-    (acc: CategoriesMap, docSnapshot) => {
-      const { title, items } = docSnapshot.data();
-      acc[title.toLowerCase()] = items;
-      return acc;
-    },
-    {},
+  return querySnapshot.docs.map((docSnapshot) =>
+    docSnapshot.data(),
   );
-
-  return categoryMap;
 };
 
 export interface User {
