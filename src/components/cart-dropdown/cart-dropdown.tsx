@@ -1,10 +1,7 @@
 import React, { useContext } from "react";
 import "./cart-dropdown.styles";
 import CartItem from "../cart-item/cart-item";
-import {
-  CartContext,
-  CartItemObj,
-} from "../../contexts/cart.context";
+import { CartContext } from "../../contexts/cart.context";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes/types";
 import {
@@ -13,6 +10,7 @@ import {
   EmptyMessage,
 } from "./cart-dropdown.styles";
 import Button from "../button/button";
+import { CartItemObj } from "../../store/cart/cart.types";
 
 const CartDropdown = () => {
   const { cartItems, setIsCartOpen } =
