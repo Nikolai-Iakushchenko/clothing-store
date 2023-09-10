@@ -1,5 +1,4 @@
 import React from "react";
-import { CartItemObj } from "../../contexts/cart.context";
 import "./cart-item.styles";
 import {
   CartItemContainer,
@@ -7,6 +6,7 @@ import {
   CartItemName,
   ItemDetails,
 } from "./cart-item.styles";
+import { CartItemObj } from "../../store/cart/cart.types";
 
 interface CartItemProps {
   cartItem: CartItemObj;

@@ -1,5 +1,4 @@
 import React from "react";
-import { CartItemObj } from "../../contexts/cart.context";
 import "./checkout-item.styles";
 import {
   Arrow,
@@ -18,6 +17,7 @@ import {
 } from "../../store/cart/cart.action";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart.selector";
+import { CartItemObj } from "../../store/cart/cart.types";
 
 interface CheckoutItemProps {
   cartItem: CartItemObj;
