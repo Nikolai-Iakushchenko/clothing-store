@@ -9,21 +9,7 @@ import {
   persistStore,
   persistReducer,
 } from "redux-persist";
-
-const loggerMiddleware: any =
-  (store: any) => (next: any) => (action: any) => {
-    if (!action.type) {
-      return next(action);
-    }
-
-    console.log("type", action.type);
-    console.log("payload", action.payload);
-    console.log("currentState", store.getState());
-
-    next(action);
-
-    console.log("next state:", store.getState());
-  };
+import logger from "redux-logger";
 
 const persistConfig = {
   key: "root",
@@ -36,9 +22,19 @@ const persistedReducer = persistReducer(
   rootReducer,
 );
 
-const middleWares = [loggerMiddleware];
+const middleWares = [
+  process.env.NODE_ENV !== "production" && logger,
+].filter(Boolean);
 
-const composedEnhancers = compose(
+
+const composeEnhancer =
+  (window[
+    // @ts-ignore
+    "__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"
+  ] as typeof compose) || compose;
+
+const composedEnhancers = composeEnhancer(
+  // @ts-ignore
   applyMiddleware(...middleWares),
 );
 export const store = legacy_createStore(
