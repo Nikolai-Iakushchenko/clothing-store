@@ -4,6 +4,11 @@ import {
   legacy_createStore,
 } from "redux";
 import { rootReducer } from "./root-reducer";
+import storage from "redux-persist/lib/storage";
+import {
+  persistStore,
+  persistReducer,
+} from "redux-persist";
 
 const loggerMiddleware: any =
   (store: any) => (next: any) => (action: any) => {
@@ -20,15 +25,28 @@ const loggerMiddleware: any =
     console.log("next state:", store.getState());
   };
 
+const persistConfig = {
+  key: "root",
+  storage,
+  blacklist: ["user"],
+};
+
+const persistedReducer = persistReducer(
+  persistConfig,
+  rootReducer,
+);
+
 const middleWares = [loggerMiddleware];
 
 const composedEnhancers = compose(
   applyMiddleware(...middleWares),
 );
 export const store = legacy_createStore(
-  rootReducer,
+  persistedReducer,
   undefined,
   composedEnhancers,
 );
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
