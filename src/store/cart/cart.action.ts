@@ -7,8 +7,6 @@ import { Product } from "../categories/category.types";
 
 export const setIsCartOpen = (isOpen: boolean) =>
   createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, isOpen);
-// export const setCartItems = (cartItems: CartItemObj[]) =>
-//   createAction(CART_ACTION_TYPES.SET_CART_ITEMS, cartItems);
 
 const addCartItem = (
   cartItems: CartItemObj[],
@@ -56,27 +54,46 @@ const clearCartItem = (
     return cartItem.id !== cartItemToClear.id;
   });
 
-const addItemToCart = (productToAdd: Product) => {
+// Action creators
+export const addItemToCart = (
+  cartItems: CartItemObj[],
+  productToAdd: Product,
+) => {
   const newCartItems = addCartItem(cartItems, productToAdd);
-  updateCartItemsReducer(newCartItems);
+  console.log("cartItems", cartItems);
+  console.log("productToAdd", productToAdd);
+
+  console.log("newCartItems", newCartItems);
+  return createAction(
+    CART_ACTION_TYPES.SET_CART_ITEMS,
+    newCartItems,
+  );
 };
 
-const removeItemFromCart = (
+export const removeItemFromCart = (
+  cartItems: CartItemObj[],
   cartItemToRemove: CartItemObj,
 ) => {
   const newCartItems = removeCartItem(
     cartItems,
     cartItemToRemove,
   );
-  updateCartItemsReducer(newCartItems);
+  return createAction(
+    CART_ACTION_TYPES.SET_CART_ITEMS,
+    newCartItems,
+  );
 };
 
-const clearItemFromCart = (
+export const clearItemFromCart = (
+  cartItems: CartItemObj[],
   cartItemToClear: CartItemObj,
 ) => {
   const newCartItems = clearCartItem(
     cartItems,
     cartItemToClear,
   );
-  updateCartItemsReducer(newCartItems);
+  return createAction(
+    CART_ACTION_TYPES.SET_CART_ITEMS,
+    newCartItems,
+  );
 };

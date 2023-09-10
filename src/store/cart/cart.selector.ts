@@ -1,35 +1,34 @@
 import { RootState } from "../store";
 import { createSelector } from "reselect";
+import { CartState } from "./cart.types";
 
-const newCartCount = cartItems.reduce(
-  (total, cartItem) => total + cartItem.quantity,
-  0,
+const selectCartReducer = (state: RootState) => state.cart;
+
+export const selectCartItems = createSelector(
+  [selectCartReducer],
+  (cart: CartState) => cart.cartItems,
 );
 
-const newCartTotal = cartItems.reduce(
-  (total, cartItem) =>
-    total + cartItem.quantity * cartItem.price,
-  0,
+export const selectIsCartOpen = createSelector(
+  [selectCartReducer],
+  (cart) => cart.isCartOpen,
 );
 
-// const selectCartReducer = (state: RootState) => state.cart;
-//
-// export const selectCartItems = createSelector(
-//   [selectCartReducer],
-//   (cart) => cart.cartItems,
-// );
-//
-// export const selectCartTotal = createSelector(
-//   [selectCartReducer],
-//   (cart) => cart.cartTotal,
-// );
-//
-// export const selectCartCount = createSelector(
-//   [selectCartReducer],
-//   (cart) => cart.cartCount,
-// );
-//
-// export const selectIsCartOpen = createSelector(
-//   [selectCartReducer],
-//   (cart) => cart.isCartOpen,
-// );
+export const selectCartCount = createSelector(
+  [selectCartItems],
+  (cartItems) =>
+    cartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity,
+      0,
+    ),
+);
+
+export const selectCartTotal = createSelector(
+  [selectCartItems],
+  (cartItems) =>
+    cartItems.reduce(
+      (total, cartItem) =>
+        total + cartItem.quantity * cartItem.price,
+      0,
+    ),
+);
