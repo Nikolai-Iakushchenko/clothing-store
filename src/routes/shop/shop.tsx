@@ -13,7 +13,6 @@ const Shop = () => {
     const getCategoriesMap = async () => {
       const categoriesArray =
         await getCategoriesAndDocuments();
-      console.log("categoriesArray", categoriesArray);
       // @ts-ignore
       dispatch(setCategories(categoriesArray));
     };

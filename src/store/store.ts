@@ -10,6 +10,7 @@ import {
   persistReducer,
 } from "redux-persist";
 import logger from "redux-logger";
+import thunk from "redux-thunk";
 
 const persistConfig = {
   key: "root",
@@ -24,8 +25,8 @@ const persistedReducer = persistReducer(
 
 const middleWares = [
   process.env.NODE_ENV !== "production" && logger,
+  thunk,
 ].filter(Boolean);
-
 
 const composeEnhancer =
   (window[
