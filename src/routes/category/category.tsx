@@ -13,10 +13,12 @@ const Category = () => {
   const { category } = useParams();
   const categoriesMap = useSelector(selectCategoriesMap);
   const [products, setProducts] = useState<Product[]>([
+    // @ts-ignore
     categoriesMap[category],
   ]);
 
   useEffect(() => {
+    // @ts-ignore
     setProducts(categoriesMap[category]);
   }, [category, categoriesMap]);
 
