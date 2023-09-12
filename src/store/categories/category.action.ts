@@ -1,9 +1,5 @@
 import { createAction } from "../../utils/reducer/reducer.utils";
 import { CATEGORIES_ACTION_TYPES } from "./category.types";
-import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
-import { Dispatch } from "redux";
-// import firebase from "firebase/compat";
-// import DocumentData = firebase.firestore.DocumentData;
 
 export const fetchCategoriesStart = () =>
   createAction(
@@ -23,15 +19,15 @@ export const fetchCategoriesFailed = (error: Error) =>
   );
 
 // Thunk
-export const fetchCategoriesAsync =
-  () =>
-  async (dispatch: Dispatch): Promise<any> => {
-    dispatch(fetchCategoriesStart());
-    try {
-      const categoriesArray: any[] =
-        await getCategoriesAndDocuments("categories");
-      dispatch(fetchCategoriesSuccess(categoriesArray));
-    } catch (error: any) {
-      dispatch(fetchCategoriesFailed(error));
-    }
-  };
+// export const fetchCategoriesAsync =
+//   () =>
+//   async (dispatch: Dispatch): Promise<any> => {
+//     dispatch(fetchCategoriesStart());
+//     try {
+//       const categoriesArray: any[] =
+//         await getCategoriesAndDocuments("categories");
+//       dispatch(fetchCategoriesSuccess(categoriesArray));
+//     } catch (error: any) {
+//       dispatch(fetchCategoriesFailed(error));
+//     }
+//   };
