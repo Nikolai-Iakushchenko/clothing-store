@@ -4,14 +4,19 @@ import { Product } from "../../store/categories/category.types";
 import ProductCard from "../../components/product-card/product-card";
 import {
   CategoryContainer,
-  CategoryTitle,
+  Title,
 } from "./category.styles";
 import { useSelector } from "react-redux";
-import { selectCategoriesMap } from "../../store/categories/category.selector";
+import {
+  selectCategoriesIsLoading,
+  selectCategoriesMap,
+} from "../../store/categories/category.selector";
+import Spinner from "../../components/spinner/spinner";
 
 const Category = () => {
   const { category } = useParams();
   const categoriesMap = useSelector(selectCategoriesMap);
+  const isLoading = useSelector(selectCategoriesIsLoading);
   const [products, setProducts] = useState<Product[]>([
     // @ts-ignore
     categoriesMap[category],
@@ -24,22 +29,24 @@ const Category = () => {
 
   return (
     <>
-      <CategoryTitle>
-        {category?.toUpperCase()}
-      </CategoryTitle>
-      <CategoryContainer>
-        {products &&
-          products.map((product) => {
-            if (!product) return null;
+      <Title>{category?.toUpperCase()}</Title>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <CategoryContainer>
+          {products &&
+            products.map((product) => {
+              if (!product) return null;
 
-            return (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
-            );
-          })}
-      </CategoryContainer>
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                />
+              );
+            })}
+        </CategoryContainer>
+      )}
     </>
   );
 };

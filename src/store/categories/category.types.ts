@@ -16,6 +16,8 @@ export interface CategoriesMap {
 
 export interface CategoriesState {
   categories: ICategory[];
+  isLoading: boolean;
+  error: any;
 }
 
 export interface CategoriesAction {

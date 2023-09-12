@@ -12,7 +12,7 @@ interface CaterogyPreviewProps {
   products: Product[];
 }
 
-const CaterogyPreview = ({
+const CategoryPreview = ({
   title,
   products,
 }: CaterogyPreviewProps) => (
@@ -32,4 +32,4 @@ const CaterogyPreview = ({
   </CategoryPreviewContainer>
 );
 
-export default CaterogyPreview;
+export default CategoryPreview;

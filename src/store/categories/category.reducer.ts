@@ -4,7 +4,7 @@ import {
   CategoriesState,
 } from "./category.types";
 
-export const CATEGORIES_INITIAL_STATE = {
+export const CATEGORIES_INITIAL_STATE: CategoriesState = {
   categories: [],
   isLoading: false,
   error: null,
