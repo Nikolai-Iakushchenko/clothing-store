@@ -6,10 +6,14 @@ import {
 
 export interface UserState {
   currentUser: User | null;
+  isLoading: boolean;
+  error: any;
 }
 
-const INITIAL_STATE = {
+const INITIAL_STATE: UserState = {
   currentUser: null,
+  isLoading: false,
+  error: null,
 };
 
 export const userReducer = (
@@ -19,8 +23,10 @@ export const userReducer = (
   const { type, payload } = action;
 
   switch (type) {
-    case USER_ACTION_TYPES.SET_CURRENT_USER:
+    case USER_ACTION_TYPES.SIGN_IN_SUCCESS:
       return { ...state, currentUser: payload };
+    case USER_ACTION_TYPES.SIGN_IN_FAILED:
+      return { ...state, error: payload };
     default:
       return state;
   }
