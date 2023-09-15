@@ -13,12 +13,19 @@ import {
   SignInButtonContainer,
   SignInContainer,
 } from "./sign-in-form.styles";
+import { useDispatch } from "react-redux";
+import {
+  emailSignInStart,
+  googleSignInStart,
+} from "../../store/user/user.action";
+import { pseudoRandomBytes } from "crypto";
 
 const defaultFormFields = {
   email: "",
   password: "",
 };
 const SignInForm = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(
     defaultFormFields,
   );
@@ -29,7 +36,7 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+    dispatch(googleSignInStart());
   };
   const handleSubmit = async (
     event: React.SyntheticEvent,
@@ -37,13 +44,7 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      // @ts-ignore
-      const { user } =
-        await signInAuthUserWithEmailAndPassword(
-          email,
-          password,
-        );
-
+      dispatch(emailSignInStart(email, password));
       resetFormFields();
     } catch (error: any) {
       switch (error.code) {
