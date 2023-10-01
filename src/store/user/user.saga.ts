@@ -5,15 +5,23 @@ import {
   put,
 } from "redux-saga/effects";
 import { USER_ACTION_TYPES } from "./user.types";
-import { signInSuccess, signInFailed } from "./user.action";
 import {
-  createUserDocumentFromAuth,
+  signInSuccess,
+  signInFailed,
+  signUpSuccess,
+  signUpFailed,
+} from "./user.action";
+import {
   getCurrentUser,
-  signInAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
   signInWithGooglePopup,
+  signInAuthUserWithEmailAndPassword,
+  createAuthUserWithEmailAndPassword,
   User,
 } from "../../utils/firebase/firebase.utils";
 import { getKeyEventProps } from "@testing-library/user-event/dist/keyboard/getEventProps";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import exp from "constants";
 
 export function* getSnapshotFromUserAuth(
   userAuth: User,
@@ -47,6 +55,33 @@ export function* signInWithGoogle() {
   } catch (error) {
     yield put(signInFailed(error));
   }
+}
+
+export function* signUp({
+  // @ts-ignore
+  payload: { email, password, displayName },
+}) {
+  try {
+    const { user } = yield call(
+      createAuthUserWithEmailAndPassword,
+      email,
+      password,
+    );
+    yield put(signUpSuccess(user, { displayName }));
+  } catch (error) {
+    yield put(signUpFailed(error));
+  }
+}
+
+export function* signInAfterSignUp({
+  // @ts-ignore
+  payload: { user, additionalDetails },
+}) {
+  yield call(
+    getSnapshotFromUserAuth,
+    user,
+    additionalDetails,
+  );
 }
 
 export function* onGoogleSingInStart() {
@@ -102,10 +137,24 @@ export function* onEmailSignInStart() {
   );
 }
 
+export function* onSignUpStart() {
+  // @ts-ignore
+  yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUp);
+}
+
+export function* onSignUpSuccess() {
+  yield takeLatest(
+    // @ts-ignore
+    USER_ACTION_TYPES.SIGN_UP_SUCCESS,
+    signInAfterSignUp,
+  );
+}
+
 export function* userSagas() {
   yield all([
     call(onCheckUserSession),
     call(onGoogleSingInStart),
     call(onEmailSignInStart),
+    call(onSignUpStart),
   ]);
 }
